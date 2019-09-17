@@ -1,4 +1,14 @@
-<app-post-list-item *ngFor="let post of posts; let i = index"
-[title] = "post.title"
-[content] = "post.content"
-[loveits] = "post.loveits"></app-post-list-item>
+<ul *ngFor="let post of posts; let i = index">
+
+	<li [ngClass]="{'list-group-item': true,
+	                'list-group-item-success': post.loveit > 0,
+	                'list-group-item-danger': post.loveit < 0}">
+	  <h2>{{ post.title }} ({{ post.loveit }})<p class="pull-right">{{ post.created_at | date: 'short' }}</p></h2>
+	  <p>{{ post.content }}</p>
+	  <button class="btn btn-success" type="button" name="button" (click)="onAddLoveIt(post)">Love it</button>
+	  <button class="btn btn-danger" type="button" name="button" (click)="onMunisLoveIt(post)">Don't love it</button>
+	  <button class="btn btn-danger pull-right" type="button" (click)="onRemovePost(post)">Supprimer</button>
+	</li>
+
+</ul>
+
